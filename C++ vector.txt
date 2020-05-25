@@ -1,0 +1,115 @@
+Q1:
+vector<int> nums;
+nums[0] = 12; // EXC_BAD_ASSESS
+
+Solution:
+1. vector<int> nums;
+   nums.push_back(12);
+
+2. vector<int> nums(10);
+   nums[0] = 12;
+
+note:
+When use vector with structure object, you can't push back single member but should to push back a complete object.
+Eg: vector<Movie> movies;
+    movies.push_back(m);//not m.title or m.year;
+
+///////////////////////////////////////////////////
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iomanip>
+using namespace std;
+
+struct Movie
+{
+    string title;
+    int year;
+};
+
+int main()
+{
+    vector<Movie> movie;
+    char choice = 'y';
+    while(choice == 'y')
+    {
+        Movie m;
+        cout << "Title: ";
+        cin >> m.title;
+        cout << "Year: ";
+        cin >> m.year;
+        cout << endl;
+        movie.push_back(m);
+        
+        cout << "Enter?";
+        cin >> choice;
+    }
+    
+    cout << left << setw(30) << "Title" << setw(10) << "Year" << endl;
+    for(Movie m : movie)
+    {
+        cout << setw(30) << m.title << setw(10) << m.year << endl;
+        
+    }
+
+}
+///////////////////////////////////////////////////////
+struct with vector:
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+
+struct Movie
+{
+    string title;
+    int year;
+    int star;
+    
+};
+
+void display(vector<Movie> m)
+{
+    for (Movie movie : m)
+    {
+        cout << movie.title << "    " << movie.year << "    " << movie.star << endl;
+    }
+}
+
+ void addMovie(vector<Movie>& m)
+{
+    Movie movie;
+    cout << "Title: ";
+    getline(cin, movie.title);
+    cout << "Year: ";
+    cin >> movie.year;
+    cout << "Stars: ";
+    cin >> movie.star;
+    m.push_back(movie);
+}
+
+void deleteMovie(vector<Movie>& m, int number)
+{
+    m.erase(m.begin() + number - 1);
+}
+int main()
+{
+    vector<Movie> movies;
+    Movie m;
+    m = {"Casablanca", 1942, 5};
+    movies.push_back(m);
+    m = {"Wonder Woman", 2017,4};
+    movies.push_back(m);
+    display(movies);
+    addMovie(movies);
+    display(movies);
+    
+    int number;
+    cout << "Which movie you want to delete?";
+    cin >> number;
+    deleteMovie(movies, number);
+    display(movies);
+}
+
+
+   
