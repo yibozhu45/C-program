@@ -1,0 +1,69 @@
+1. The Number Cruncher program
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+using namespace std;
+
+void display(int num)
+{
+    cout << num << " ";
+}
+
+int main()
+{
+    cout << "The Number Cruncher Program" << endl << endl;
+    
+    vector<int> numbers;
+    numbers.reserve(11);
+    
+    for (int i = 0; i < numbers.capacity(); i++) {
+        int number = rand() % 30;
+        numbers.push_back(number);
+    }
+    
+    cout << numbers.size() << " Random Numbers: ";
+    for_each(numbers.begin(), numbers.end(), display);
+    
+    cout << endl << numbers.size() << " Sorted Number: ";
+    sort(numbers.begin(), numbers.end());
+    for_each(numbers.begin(), numbers.end(), display);
+    
+    int sum = accumulate(numbers.begin(), numbers.end(), 0);
+    cout << endl << "Sum = " << sum << " Average = " << sum / numbers.size();
+    
+    auto max_iter = max_element(numbers.begin(), numbers.end());
+    cout << " Max = " << *max_iter;
+    
+    auto min_iter = min_element(numbers.begin(), numbers.end());
+    cout << " Min = " << *min_iter;
+    
+    cout << endl << endl;
+    int num = 19;
+    bool number_exists = binary_search(numbers.begin(), numbers.end(), num);
+    
+    if(number_exists)
+    {
+        int c = count(numbers.begin(), numbers.end(), num);
+        cout << "The number " << num << " occurs " << c << " time(s).\n";
+    }
+    else
+    {
+        cout << "These numbers do NOT include " << num << ".\n";
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
