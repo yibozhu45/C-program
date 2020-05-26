@@ -1,0 +1,157 @@
+1. vector:
+
+#include<iostream>
+#include<vector>
+#include<string>
+
+using namespace std;
+
+void display(vector<string> m)
+{
+    cout << "\nMovie Ranking\n-------------\n";
+    for(int i = 0; i < m.size(); i++)
+    {
+        cout << i + 1 << "    " << m[i] << endl;
+    }
+}
+
+void getChoice(char& choice)
+{
+    cout << "Do you want to change any rankings? (y/n): ";
+    cin >> choice;
+}
+
+void change_ranking(vector<string>& m, int current_ranking, int new_ranking)
+{
+    //make sure rankings are in bounds
+    if(current_ranking > 0 && new_ranking > 0 && current_ranking <= m.size() && new_ranking <= m.size())
+    {
+        string s = m[current_ranking - 1];
+        m.erase(m.begin() + (current_ranking - 1));
+        m.insert(m.begin() + new_ranking -1, s);
+    }
+}
+
+int main()
+{
+    vector<string> movies = {"Casablanca", "Wonder Woman", "The Godfather", "E.T", "The bridge on the river"};
+    
+    display(movies);
+    
+    char choice; getChoice(choice);
+    
+    while(choice == 'y')
+    {
+        cout << "Enter current ranking of a movie: ";
+        int current_ranking;
+        cin >> current_ranking;
+        
+        cout << "Enter new ranking of the movie: ";
+        int new_ranking;
+        cin >> new_ranking;
+        change_ranking(movies, current_ranking, new_ranking);
+        display(movies);
+        getChoice(choice);
+    }
+
+}
+
+///////////////////////////////////////////////////////////////
+2.list
+
+#include<iostream>
+#include<list>
+#include<string>
+
+using namespace std;
+
+void display(list<string> m)
+{
+    cout << "\nMovie Ranking\n-------------\n";
+    int i = 1;
+    //list doesn't have list[number]!
+    for(string movie : m)
+    {
+        cout << i << "    " << movie << endl;
+        i++;
+    }
+
+}
+
+void getChoice(char& choice)
+{
+    cout << "Do you want to change any rankings? (y/n): ";
+    cin >> choice;
+}
+
+void change_ranking(list<string>& m, int current_ranking, int new_ranking)
+{
+    //make sure rankings are in bounds
+    if(current_ranking > 0 && new_ranking > 0 && current_ranking <= m.size() && new_ranking <= m.size())
+    {
+        auto iter = m.begin();
+        for(int i = 1; i < current_ranking; i++)
+            ++iter;
+        string s = *iter;
+        m.remove(s);
+        
+        iter = m.begin();
+        for(int i = 1; i < new_ranking; i++)
+            ++iter;
+        m.insert(iter, s);
+    }
+}
+
+int main()
+{
+    list<string> movies = {"Casablanca", "Wonder Woman", "The Godfather", "E.T", "The bridge on the river"};
+    
+    display(movies);
+    
+    char choice; getChoice(choice);
+    
+    while(choice == 'y')
+    {
+        cout << "Enter current ranking of a movie: ";
+        int current_ranking;
+        cin >> current_ranking;
+        
+        cout << "Enter new ranking of the movie: ";
+        int new_ranking;
+        cin >> new_ranking;
+        change_ranking(movies, current_ranking, new_ranking);
+        display(movies);
+        getChoice(choice);
+    }
+
+}
+
+///////////////////////////////////////////////////////////////
+3. vector nested with map
+
+#include <iostream>
+#include <map>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    map<string, vector<int>> student_grades;
+    
+    student_grades["Joe"] = {78, 56, 90};
+    student_grades["Amy"] = {89, 85, 87, 83};
+    
+    cout << "Total number of students: " << student_grades.size() << endl;
+    
+    for (auto grades : student_grades)
+    {
+        cout << grades.first << " has" << grades.second.size() << " grades: ";
+        
+        for (auto grade : grades.second)
+        {
+            cout << grade << " ";
+        }
+        cout << endl;
+    }
+}
