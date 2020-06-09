@@ -1,3 +1,5 @@
+Vector, can't give size and value at same time.
+
 Q1:
 vector<int> nums;
 nums[0] = 12; // EXC_BAD_ASSESS
