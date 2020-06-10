@@ -1,5 +1,9 @@
 Vector, can't give size and value at same time.
 
+// Create a vector of size n with 
+// all values as 10. 
+    vector<int> vect(n, 10);
+
 Q1:
 vector<int> nums;
 nums[0] = 12; // EXC_BAD_ASSESS
